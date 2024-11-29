@@ -10,7 +10,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from Git repository
-                git branch: 'main', url: 'https://github.com/rohitmenon30/testAuto.git'
+                git 'https://github.com/rohitmenon30/testAuto.git'
+            }
         }
 
         stage('Setup Python Environment') {
@@ -55,6 +56,17 @@ pipeline {
             // Ensure to delete the virtual environment on completion
             cleanWs()
         }
+
+        success {
+            echo 'Tests ran successfully!'
+        }
+
+        failure {
+            echo 'Tests failed, check the report for details.'
+        }
+    }
+}
+
 
         success {
             echo 'Tests ran successfully!'
